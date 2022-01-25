@@ -1,6 +1,8 @@
 #ifndef _STREAM_SERVER_H_
 #define _STREAM_SERVER_H_
 
+#include "BasicUsageEnvironment.hh"
+#include "GroupsockHelper.hh"
 #include "RTSPServer.hh"
 
 class DynamicRTSPServer: public RTSPServer 

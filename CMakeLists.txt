@@ -6,15 +6,24 @@ if (WIN32)
     add_definitions(
         -D_CRT_SECURE_NO_WARNINGS
         -D_WINSOCK_DEPRECATED_NO_WARNINGS
+        -DNO_GETIFADDRS
     )
 endif()
 
 include_directories(
+    ${CMAKE_CURRENT_SOURCE_DIR}/openssl-1.1.1g/include
+
     ${CMAKE_CURRENT_SOURCE_DIR}/live/BasicUsageEnvironment/include
     ${CMAKE_CURRENT_SOURCE_DIR}/live/groupsock/include
     ${CMAKE_CURRENT_SOURCE_DIR}/live/UsageEnvironment/include
     ${CMAKE_CURRENT_SOURCE_DIR}/live/liveMedia/include
 )
+
+if (WIN32)
+    link_directories(
+        ${CMAKE_CURRENT_SOURCE_DIR}/openssl-1.1.1g/prebuild/win
+    )
+endif()
 
 file(GLOB LIVE555_SRC
     live/BasicUsageEnvironment/*.cpp
@@ -36,3 +45,10 @@ add_executable(stream_server_demo
     ${STREAM_SERVER_DEMO_SRC}
 )
 
+if (WIN32)
+    target_link_libraries(stream_server_demo
+        ws2_32
+        libssl
+        libcrypto
+    )
+endif()
