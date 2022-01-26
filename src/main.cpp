@@ -21,7 +21,7 @@ int main(int argc, char** argv)
     // Create the RTSP server.  Try first with the default port number (554),
   // and then with the alternative port number (8554):
     RTSPServer* rtspServer;
-    portNumBits rtspServerPortNum = 554;
+    portNumBits rtspServerPortNum = 554; // NOTICE: can specify port
     rtspServer = DynamicRTSPServer::createNew(*env, rtspServerPortNum, authDB);
     if (rtspServer == NULL) {
         rtspServerPortNum = 8554;
