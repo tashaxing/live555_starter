@@ -49,7 +49,7 @@ int main(int argc, char** argv)
         std::cout << "\t" << rtspURLPrefix << "<filename>\n";
         delete[] rtspURLPrefix;
     }
-    std::cout << "where <filename> is a file present in the current directory.\n";
+    std::cout << "where <filename> is a file present in the current directory, could be relative sub folder path.\n";
 
     std::cout << "Each file's type is inferred from its name suffix:\n";
     std::cout << "\t\".264\" => a H.264 Video Elementary Stream file\n";
