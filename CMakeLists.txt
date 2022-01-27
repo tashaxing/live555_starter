@@ -8,6 +8,12 @@ if (WIN32)
         -D_WINSOCK_DEPRECATED_NO_WARNINGS
         -DNO_GETIFADDRS
     )
+else()
+    add_definitions(
+        -DSOCKLEN_T=socklen_t 
+        -D_LARGEFILE_SOURCE=1 
+        -D_FILE_OFFSET_BITS=64
+    )
 endif()
 
 include_directories(
@@ -22,6 +28,10 @@ include_directories(
 if (WIN32)
     link_directories(
         ${CMAKE_CURRENT_SOURCE_DIR}/openssl-1.1.1g/prebuild/win
+    )
+else()
+    link_directories(
+        ${CMAKE_CURRENT_SOURCE_DIR}/openssl-1.1.1g/prebuild/linux
     )
 endif()
 
@@ -50,5 +60,10 @@ if (WIN32)
         ws2_32
         libssl
         libcrypto
+    )
+else()
+    target_link_libraries(stream_server_demo
+        ssl
+        crypto
     )
 endif()
